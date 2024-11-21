@@ -6,7 +6,7 @@
 #    By: gakarbou <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 16:12:41 by gakarbou          #+#    #+#              #
-#    Updated: 2024/11/20 23:25:32 by gakarbou         ###   ########.fr        #
+#    Updated: 2024/11/21 16:55:53 by gakarbou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,10 @@ HEAD_DIR = includes/
 SRCS = main.c \
 	   ft_instructions.c \
 	   ft_instructions2.c \
-	   stack_utils.c
+	   stack_utils.c \
+	   utils.c \
+	   sort_b_utils.c
+
 
 FILES = $(addprefix $(SRCS_DIR), $(SRCS))
 

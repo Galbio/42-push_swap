@@ -6,7 +6,7 @@
 /*   By: gakarbou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 21:51:30 by gakarbou          #+#    #+#             */
-/*   Updated: 2024/11/20 23:35:12 by gakarbou         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:40:19 by gakarbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	swap_swap(t_stack_info *stacks)
 	swap_a(&(stacks->stack_b), stacks->size_b, 0);
 }
 
-void	push_a(t_stack_info *stacks)
+void	push_b(t_stack_info *stacks)
 {
 	t_stack	*temp;
 
@@ -62,7 +62,7 @@ void	push_a(t_stack_info *stacks)
 	stacks->size_b += 1;
 }
 
-void	push_b(t_stack_info *stacks)
+void	push_a(t_stack_info *stacks)
 {
 	t_stack	*temp;
 

@@ -6,7 +6,7 @@
 /*   By: gakarbou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 22:16:33 by gakarbou          #+#    #+#             */
-/*   Updated: 2024/11/20 23:23:36 by gakarbou         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:23:53 by gakarbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ void	rotate_lst(t_stack **lst, int size, char st_id)
 		return ;
 	temp = ft_stack_last(*lst);
 	temp->next = *lst;
-	*lst = (*lst)->next;
+	temp = (*lst)->next;
+	(*lst)->next = NULL;
+	*lst = temp;
 }
 
 void	rotate_rotate(t_stack_info *stacks)

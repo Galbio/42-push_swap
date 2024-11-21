@@ -6,12 +6,11 @@
 /*   By: gakarbou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:10:43 by gakarbou          #+#    #+#             */
-/*   Updated: 2024/11/21 21:15:55 by gakarbou         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:05:57 by gakarbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 char	check_argv_errors(char *str, long int *limits)
 {
@@ -154,22 +153,25 @@ int	stack_is_sorted(t_stack *stack)
 	return (1);
 }
 
-void	sort_pairs(t_stack_info *stacks, int saw)
+void	sort_pairs(t_stack_info *stacks)
 {
 	int	to_do;
 
+	display_stacks(stacks);
 	to_do = 0;
-	if ((stacks->size_a - saw >= 2) && stacks->size_a >= 2
-			&& (stacks->stack_a->value < stacks->stack_a->next->value))
+	if (stacks->size_a >= 2 && (stacks->stack_a->value >
+				stacks->stack_a->next->value))
 		to_do += 1;
-	if (stacks->size_b == 2 && stacks->stack_b->value < stacks->stack_b->next->value)
+	if (stacks->stack_b->value > stacks->stack_b->next->value)
 		to_do += 2;
 	if (to_do == 3)
 		swap_swap(stacks);
 	else if (to_do == 2)
 		swap_b(&(stacks->stack_b), stacks->size_b, 1);
-	else if (to_do == 1)
+	else
 		swap_a(&(stacks->stack_a), stacks->size_a, 1);
+	display_stacks(stacks);
+	exit(0);
 }
 
 int	get_reverse_order(t_stack_info *stacks, int stack_len)
@@ -221,22 +223,29 @@ char	get_order(t_stack_info *stacks)
 	return (2);
 }
 
-void	ft_sort_into_b(t_stack_info *stacks, int size, int saw)
+void	ft_sort_into_b(t_stack_info *stacks, int size)
 {
 	char	order;
 	int		i;
-	int		og_size;
 
+	display_stacks(stacks);
 	order = get_order(stacks);
-	og_size = stacks->size_a;
 	i = -1;
-	if (order)
-		while (++i < ft_min(size, (og_size - saw)))
+	if (order == 3)
+		while (++i < size)
+			insert_max(stacks);
+	else if (order)
+		while (++i < size)
 			insert_ascending(stacks, stacks->stack_a->value);
-	while (!stack_is_sorted_2(stacks->stack_b))
+	exit(0);
+	while (!stack_is_sorted(stacks->stack_b))
 		rotate_lst(&(stacks->stack_b), 1, 'b');
-	while (stacks->size_b)
+	i = -1;
+	while (++i < (size * 2))
+	{
 		push_a(stacks);
+		rotate_lst(&(stacks->stack_a), 1, 'a');
+	}
 }
 
 int	push_swap(t_stack_info *stacks)
@@ -249,18 +258,16 @@ int	push_swap(t_stack_info *stacks)
 		return (sort_under_3(stacks), 0);
 	size = 2;
 	saw = 0;
-	while ((stacks->size_a + stacks->size_b) > size)
+	while (size < 3 && (stacks->size_a + stacks->size_b) >= size)
 	{
-		if (stack_is_sorted(stacks->stack_a))
-			return (1);
 		count = -1;
-		while (++count < ft_min(size, stacks->og_size_a - saw))
+		while (++count < ft_min(size, stacks->size_a))
 			push_b(stacks);
 		if (size == 2)
-			sort_pairs(stacks, saw);
-		ft_sort_into_b(stacks, size, saw);
+			sort_pairs(stacks);
+		ft_sort_into_b(stacks, size);
 		saw += size * 2;
-		if (saw >= stacks->size_a)
+		if (saw >= (stacks->size_a + stacks->size_b))
 			size *= 2;
 		if (saw >= (stacks->size_a + stacks->size_b))
 			saw = 0;
@@ -277,9 +284,9 @@ int	main(int argc, char **argv)
 	stacks = create_stacks(argc, argv);
 	if (!stacks)
 		return (0);
-	stacks->og_size_a = stacks->size_a;
-	stacks->og_size_b = stacks->size_b;
-	push_swap(stacks);
-	//display_stacks(stacks);
+	display_stacks(stacks);
+	if (stacks->size_a > 1)
+		push_swap(stacks);
+	display_stacks(stacks);
 	return (0);
 }
