@@ -6,7 +6,7 @@
 /*   By: gakarbou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 22:16:33 by gakarbou          #+#    #+#             */
-/*   Updated: 2024/11/21 17:23:53 by gakarbou         ###   ########.fr       */
+/*   Updated: 2024/11/22 18:05:29 by gakarbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	rotate_rotate(t_stack_info *stacks)
 void	reverse_rotate_lst(t_stack **lst, int size, char st_id)
 {
 	t_stack	*temp;
+	t_stack	*temp2;
 
 	if (st_id)
 	{
@@ -52,7 +53,11 @@ void	reverse_rotate_lst(t_stack **lst, int size, char st_id)
 		return ;
 	temp = ft_stack_last(*lst);
 	temp->next = *lst;
+	temp2 = *lst;
 	*lst = temp;
+	while (temp2->next != temp)
+		temp2 = temp2->next;
+	temp2->next = NULL;
 }
 
 void	reverse_rotate_rotate(t_stack_info *stacks)

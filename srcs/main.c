@@ -6,7 +6,7 @@
 /*   By: gakarbou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:10:43 by gakarbou          #+#    #+#             */
-/*   Updated: 2024/11/21 21:15:55 by gakarbou         ###   ########.fr       */
+/*   Updated: 2024/11/22 18:03:10 by gakarbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,13 +230,19 @@ void	ft_sort_into_b(t_stack_info *stacks, int size, int saw)
 	order = get_order(stacks);
 	og_size = stacks->size_a;
 	i = -1;
-	if (order)
+	if (order == 1)
 		while (++i < ft_min(size, (og_size - saw)))
 			insert_ascending(stacks, stacks->stack_a->value);
+	else
+		while (++i < ft_min(size, (og_size - saw)))
+			insert_descending(stacks, stacks->stack_a->value);
 	while (!stack_is_sorted_2(stacks->stack_b))
 		rotate_lst(&(stacks->stack_b), 1, 'b');
 	while (stacks->size_b)
+	{
 		push_a(stacks);
+		reverse_rotate_lst(&(stacks->stack_a), 2, 'a');
+	}
 }
 
 int	push_swap(t_stack_info *stacks)
@@ -280,6 +286,6 @@ int	main(int argc, char **argv)
 	stacks->og_size_a = stacks->size_a;
 	stacks->og_size_b = stacks->size_b;
 	push_swap(stacks);
-	//display_stacks(stacks);
+	display_stacks(stacks);
 	return (0);
 }
