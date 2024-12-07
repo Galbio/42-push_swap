@@ -5,50 +5,39 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gakarbou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 19:29:24 by gakarbou          #+#    #+#             */
-/*   Updated: 2024/11/22 17:09:44 by gakarbou         ###   ########.fr       */
+/*   Created: 2024/12/04 14:15:56 by gakarbou          #+#    #+#             */
+/*   Updated: 2024/12/07 02:50:43 by gakarbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "../libft/libft.h"
+# include "../libft/includes/libft.h"
 
-typedef struct s_stack
+typedef struct s_stacks
 {
-	int				value;
-	struct s_stack	*next;
-}	t_stack;
+	int				size_a;
+	int				size_b;
+	t_list			*stack_a;
+	t_list			*stack_b;
+}	t_stacks;
 
-typedef struct s_stack_info
-{
-	t_stack	*stack_a;
-	t_stack	*stack_b;
-	int		size_a;
-	int		size_b;
-	int		og_size_a;
-	int		og_size_b;
-}	t_stack_info;
+int	ft_printf(const char *format, ...);
 
-//Commands
-void	swap_a(t_stack **stack, int size, char wr);
-void	swap_b(t_stack **stack, int size, char wr);
-void	swap_swap(t_stack_info *stacks);
-void	push_a(t_stack_info *stacks);
-void	push_b(t_stack_info *stacks);
-void	rotate_lst(t_stack **lst, int size, char st_id);
-void	rotate_rotate(t_stack_info *stacks);
-void	reverse_rotate_lst(t_stack **lst, int size, char st_id);
-void	reverse_rotate_rotate(t_stack_info *stacks);
+int	get_max(t_list *lst);
+int	get_min(t_list *lst);
+int	get_content_val(t_list *node);
 
-t_stack	*ft_stack_last(t_stack *lst);
-void	insert_ascending(t_stack_info *stacks, int value);
-void	insert_descending(t_stack_info *stacks, int value);
-void	insert_max(t_stack_info *stacks);
-int	ft_min(int a, int b);
-void	display_stacks(t_stack_info *stacks);
-int	stack_is_sorted(t_stack *stack);
-int	stack_is_sorted_2(t_stack *stack);
+/*   Commands  */
+void	swap_a(t_stacks *stacks, char print);
+void	swap_b(t_stacks *stacks, char print);
+void	push_lst(t_stacks *lst, char id);
+void	rotate_a(t_stacks *lst, char print);
+void	rotate_b(t_stacks *lst, char print);
+void	rr(t_stacks *lst);
+void	reverse_rotate_a(t_stacks *lst, char print);
+void	reverse_rotate_b(t_stacks *lst, char print);
+void	reverse_reverse_rotate(t_stacks *lst);
 
 #endif
