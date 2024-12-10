@@ -6,7 +6,7 @@
 #    By: gakarbou <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 16:12:41 by gakarbou          #+#    #+#              #
-#    Updated: 2024/12/09 23:22:49 by gakarbou         ###   ########.fr        #
+#    Updated: 2024/12/10 02:34:15 by gakarbou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,10 +75,10 @@ GNL_BONUS_SRCS = get_next_line_bonus.c \
 				 get_next_line_utils_bonus.c
 
 FT_PRINTF_SRCS = flags.c \
-				 utils2.c \
 				 writers.c \
 				 writers2.c \
-				 ft_printf.c
+				 ft_printf.c \
+				 utils.c
 
 
 LIBFT_FILES = $(addprefix $(LIBFT_DIR), $(LIBFT_SRCS))
@@ -107,7 +107,7 @@ bonus : $(LIBFT_OBJS) $(LIBFT_OBJS_BONUS) $(GNL_BONUS_OBJS) $(FT_PRINTF_OBJS)
 	ar -rcs $(NAME) $(LIBFT_OBJS) $(LIBFT_OBJS_BONUS) $(GNL_BONUS_OBJS) $(FT_PRINTF_OBJS)
 
 %.o : %.c
-	$(CC) $(FLAGS) -c $< -o $@ -I $(HEAD_DIR) -g
+	$(CC) $(FLAGS) -c $< -o $@ -I $(HEAD_DIR)
 
 clean :
 	rm -f $(LIBFT_OBJS) $(LIBFT_OBJS_BONUS) $(GNL_OBJS) $(GNL_BONUS_OBJS) $(FT_PRINTF_OBJS)
