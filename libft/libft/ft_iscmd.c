@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_iscmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gakarbou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 15:14:44 by gakarbou          #+#    #+#             */
-/*   Updated: 2024/12/10 15:55:22 by gakarbou         ###   ########.fr       */
+/*   Created: 2024/12/10 15:04:12 by gakarbou          #+#    #+#             */
+/*   Updated: 2024/12/10 15:08:53 by gakarbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_isprint(int c)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	return (c >= 32 && c <= 126);
 }
 
-size_t	ft_strclen(const char *s, char c)
+int	ft_isascii(int c)
 {
-	size_t	i;
+	return (c >= 0 && c <= 127);
+}
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] && s[i] != c)
-		i++;
-	return (i);
+int	ft_isalpha(int c)
+{
+	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
+}
+
+int	ft_isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
+}
+
+int	ft_isalnum(int c)
+{
+	return (ft_isalpha(c) || ft_isdigit(c));
 }

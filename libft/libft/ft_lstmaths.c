@@ -1,35 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_lstmaths.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gakarbou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 15:14:44 by gakarbou          #+#    #+#             */
-/*   Updated: 2024/12/10 15:55:22 by gakarbou         ###   ########.fr       */
+/*   Created: 2024/12/10 14:48:07 by gakarbou          #+#    #+#             */
+/*   Updated: 2024/12/10 16:14:42 by gakarbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_lstmin(t_list *lst, int (*get_value)(t_list *))
 {
-	size_t	i;
+	int	min;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	min = get_value(lst);
+	lst = lst->next;
+	while (lst)
+	{
+		if (get_value(lst) < min)
+			min = get_value(lst);
+		lst = lst->next;
+	}
+	return (min);
 }
 
-size_t	ft_strclen(const char *s, char c)
+int	ft_lstmax(t_list *lst, int (*get_value)(t_list *))
 {
-	size_t	i;
+	int	max;
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] && s[i] != c)
-		i++;
-	return (i);
+	max = get_value(lst);
+	lst = lst->next;
+	while (lst)
+	{
+		if (get_value(lst) > max)
+			max = get_value(lst);
+		lst = lst->next;
+	}
+	return (max);
 }

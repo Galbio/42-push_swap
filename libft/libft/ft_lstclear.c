@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gakarbou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 15:14:44 by gakarbou          #+#    #+#             */
-/*   Updated: 2024/12/10 15:55:22 by gakarbou         ###   ########.fr       */
+/*   Created: 2024/11/06 14:22:16 by gakarbou          #+#    #+#             */
+/*   Updated: 2024/12/10 16:02:10 by gakarbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	if (lst)
+	{
+		if (del && lst->content)
+			(*del)(lst->content);
+		free(lst);
+	}
 }
 
-size_t	ft_strclen(const char *s, char c)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	size_t	i;
+	t_list	*prev;
+	t_list	*cur;
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] && s[i] != c)
-		i++;
-	return (i);
+	cur = *lst;
+	while (cur)
+	{
+		prev = cur;
+		cur = cur->next;
+		ft_lstdelone(prev, del);
+		prev = NULL;
+	}
+	*lst = NULL;
 }

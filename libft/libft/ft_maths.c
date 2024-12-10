@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_maths.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gakarbou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 15:14:44 by gakarbou          #+#    #+#             */
-/*   Updated: 2024/12/10 15:55:22 by gakarbou         ###   ########.fr       */
+/*   Created: 2024/12/10 14:52:46 by gakarbou          #+#    #+#             */
+/*   Updated: 2024/12/10 14:53:45 by gakarbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int long	ft_abs(int a)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	if (a >= 0)
+		return (a);
+	return (-a);
 }
 
-size_t	ft_strclen(const char *s, char c)
+int long	ft_min(int a, int b)
 {
-	size_t	i;
+	if (a <= b)
+		return (a);
+	return (b);
+}
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] && s[i] != c)
-		i++;
-	return (i);
+int long	ft_max(int a, int b)
+{
+	if (a >= b)
+		return (a);
+	return (b);
 }

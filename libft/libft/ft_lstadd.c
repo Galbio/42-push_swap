@@ -1,41 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gakarbou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 11:25:46 by gakarbou          #+#    #+#             */
-/*   Updated: 2024/12/10 15:56:24 by gakarbou         ###   ########.fr       */
+/*   Created: 2024/12/10 15:45:36 by gakarbou          #+#    #+#             */
+/*   Updated: 2024/12/10 15:53:51 by gakarbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+t_list	*ft_lstnew(void *content)
 {
-	char	*dest;
-	size_t	len;
+	t_list	*dest;
 
-	len = ft_strlen(s);
-	dest = malloc((len + 1) * sizeof(char));
+	dest = malloc(sizeof(t_list));
 	if (!dest)
 		return (NULL);
-	ft_memmove(dest, s, len);
-	dest[len] = 0;
+	dest->content = content;
+	dest->next = NULL;
 	return (dest);
 }
 
-char	*ft_strndup(const char *s, size_t n)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	char	*dest;
-	size_t	len;
+	t_list	*temp;
 
-	len = ft_min(n, ft_strlen(s));
-	dest = malloc((len + 1) * sizeof(char));
-	if (!dest)
-		return (dest);
-	ft_memmove(dest, s, len);
-	dest[len] = 0;
-	return (dest);
+	if (!lst)
+		return ;
+	if (!(*lst))
+	{
+		*lst = new;
+		return ;
+	}
+	temp = ft_lstlast(*lst);
+	temp->next = new;
+}
+
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	if (lst && *lst)
+		new->next = *lst;
+	*lst = new;
 }

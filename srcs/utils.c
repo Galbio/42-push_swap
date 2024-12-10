@@ -5,39 +5,70 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gakarbou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 01:15:01 by gakarbou          #+#    #+#             */
-/*   Updated: 2024/12/07 01:47:40 by gakarbou         ###   ########.fr       */
+/*   Created: 2024/12/10 17:06:26 by gakarbou          #+#    #+#             */
+/*   Updated: 2024/12/10 17:15:18 by gakarbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	get_min(t_list *lst)
+void	init_info(t_stacks *infos)
 {
-	int	min;
-
-	min = get_content_val(lst);
-	lst = lst->next;
-	while (lst)
-	{
-		if (get_content_val(lst) < min)
-			min = get_content_val(lst);
-		lst = lst->next;
-	}
-	return (min);
+	infos->size_a = 0;
+	infos->size_b = 0;
+	infos->stack_a = NULL;
+	infos->stack_b = NULL;
 }
 
-int	get_max(t_list *lst)
+int	gcv(t_list *node)
 {
-	int	max;
+	int	*cont;
 
-	max = get_content_val(lst);
-	lst = lst->next;
+	cont = (int *)node->content;
+	return ((int)cont[0]);
+}
+
+void	display_lst(t_stacks *info)
+{
+	t_list	*cur;
+
+	cur = info->stack_a;
+	ft_putstr_fd("Stack A = ", 1);
+	while (cur)
+	{
+		ft_printf("[%d] -> ", gcv(cur));
+		cur = cur->next;
+	}
+	write(1, "\n\n", 2);
+	cur = info->stack_b;
+	ft_putstr_fd("Stack B = ", 1);
+	while (cur)
+	{
+		ft_printf("[%d] -> ", gcv(cur));
+		cur = cur->next;
+	}
+}
+
+char	is_sorted(t_list *lst)
+{
+	int long	min;
+
+	min = gcv(lst) - 1;
 	while (lst)
 	{
-		if (get_content_val(lst) > max)
-			max = get_content_val(lst);
+		if (gcv(lst) < min)
+			return (0);
+		min = gcv(lst);
 		lst = lst->next;
 	}
-	return (max);
+	return (1);
+}
+
+int	compute_op(int order[2])
+{
+	if (order[0] >= 0 && order[1] >= 0)
+		return (1 + ft_max(order[0], order[1]));
+	else if (order[0] < 0 && order[1] < 0)
+		return (1 + ft_max(ft_abs(order[0]), ft_abs(order[1])));
+	return (ft_abs(order[0]) + ft_abs(order[1]) + 1);
 }

@@ -6,7 +6,7 @@
 #    By: gakarbou <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 16:12:41 by gakarbou          #+#    #+#              #
-#    Updated: 2024/12/10 02:45:02 by gakarbou         ###   ########.fr        #
+#    Updated: 2024/12/10 17:31:08 by gakarbou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,10 +21,14 @@ LIBFT_DIR = libft/
 
 LIBFT_NAME = libft.a
 
-SRCS = push_swap.c \
-	  utils.c \
-	  commands.c \
-	  commands2.c
+SRCS = main.c \
+	   utils.c \
+	   get_op.c \
+	   parsing.c \
+	   commands.c \
+	   push_swap.c \
+	   place_number.c \
+	   commands2.c \
 
 FILES = $(addprefix $(SRCS_DIR), $(SRCS))
 
