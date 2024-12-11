@@ -6,12 +6,13 @@
 #    By: gakarbou <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 16:12:41 by gakarbou          #+#    #+#              #
-#    Updated: 2024/12/10 16:02:49 by gakarbou         ###   ########.fr        #
+#    Updated: 2024/12/11 15:03:46 by gakarbou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 FLAGS = -Wall -Wextra -Werror
+DEBUG_FLAGS = -Wall -Wextra -Werror -g
 
 LIBFT_DIR = libft/
 FT_PRINTF_DIR = ft_printf/
@@ -89,6 +90,9 @@ $(NAME) : $(LIBFT_OBJS) $(GNL_OBJS) $(FT_PRINTF_OBJS)
 
 bonus : $(LIBFT_OBJS) $(LIBFT_OBJS_BONUS) $(GNL_BONUS_OBJS) $(FT_PRINTF_OBJS)
 	ar -rcs $(NAME) $(LIBFT_OBJS) $(LIBFT_OBJS_BONUS) $(GNL_BONUS_OBJS) $(FT_PRINTF_OBJS)
+
+debug : FLAGS = $(DEBUG_FLAGS)
+debug : bonus
 
 %.o : %.c
 	$(CC) $(FLAGS) -c $< -o $@ -I $(HEAD_DIR)

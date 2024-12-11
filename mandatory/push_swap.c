@@ -6,7 +6,7 @@
 /*   By: gakarbou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:53:48 by gakarbou          #+#    #+#             */
-/*   Updated: 2024/12/10 17:27:10 by gakarbou         ###   ########.fr       */
+/*   Updated: 2024/12/11 15:37:02 by gakarbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,24 +69,29 @@ void	prepare_final_sorting(t_stacks *stacks, t_list *last_three[3])
 		rotate_b(stacks, 1);
 	while (order < 0 && (gcv(stacks->stack_b) != max))
 		reverse_rotate_b(stacks, 1);
+	if (PRINT_DEBUG)
+	{
+		ft_putstr_fd("Stacks state :\n", 1);
+		display_lst(stacks);
+	}
 }
 
 void	ft_fill_stack_a(t_stacks *stacks, t_list *last_three[3])
 {
 	while (stacks->size_b && (gcv(stacks->stack_b)
 			> gcv(last_three[2])))
-		push_lst(stacks, 1);
+		push_lst(stacks, 1, 1);
 	reverse_rotate_a(stacks, 1);
 	while (stacks->size_b && (gcv(stacks->stack_b)
 			> gcv(last_three[1])))
-		push_lst(stacks, 1);
+		push_lst(stacks, 1, 1);
 	reverse_rotate_a(stacks, 1);
 	while (stacks->size_b && (gcv(stacks->stack_b)
 			> gcv(last_three[0])))
-		push_lst(stacks, 1);
+		push_lst(stacks, 1, 1);
 	reverse_rotate_a(stacks, 1);
 	while (stacks->size_b)
-		push_lst(stacks, 1);
+		push_lst(stacks, 1, 1);
 }
 
 char	push_swap(t_stacks *stacks)
@@ -97,9 +102,9 @@ char	push_swap(t_stacks *stacks)
 		return (1);
 	else if (stacks->size_a <= 3)
 		return (ft_sort_under_three(stacks), 0);
-	push_lst(stacks, 2);
+	push_lst(stacks, 2, 1);
 	if (stacks->size_a != 3)
-		push_lst(stacks, 2);
+		push_lst(stacks, 2, 1);
 	while (stacks->size_a != 3)
 		ft_sort_nb(stacks);
 	if (!is_sorted(stacks->stack_a))

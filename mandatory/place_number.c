@@ -6,7 +6,7 @@
 /*   By: gakarbou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 17:11:24 by gakarbou          #+#    #+#             */
-/*   Updated: 2024/12/10 17:23:27 by gakarbou         ###   ########.fr       */
+/*   Updated: 2024/12/11 15:37:21 by gakarbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	place_part_1(t_stacks *stacks, int cpy[2])
 		{
 			while (order[0] && order[1])
 			{
-				rr(stacks);
+				rotate_rotate(stacks, 1);
 				order[0]--;
 				order[1]--;
 			}
@@ -62,7 +62,7 @@ char	min_case(t_stacks *stacks, t_list *target, int order[2])
 char	place_number(t_stacks *stacks, int order[2], t_list *target)
 {
 	if (min_case(stacks, target, order))
-		return (push_lst(stacks, 2), 1);
+		return (push_lst(stacks, 2, 1), 1);
 	place_part_1(stacks, order);
 	if (order[0] < 0 || order[1] < 0)
 	{
@@ -70,7 +70,7 @@ char	place_number(t_stacks *stacks, int order[2], t_list *target)
 		{
 			while ((order[0] < 0) && (order[1] < 0))
 			{
-				reverse_reverse_rotate(stacks);
+				reverse_reverse_rotate(stacks, 1);
 				order[0]++;
 				order[1]++;
 			}
@@ -82,7 +82,7 @@ char	place_number(t_stacks *stacks, int order[2], t_list *target)
 			while (order[1]++ < 0)
 				reverse_rotate_b(stacks, 1);
 	}
-	push_lst(stacks, 2);
+	push_lst(stacks, 2, 1);
 	return (1);
 }
 

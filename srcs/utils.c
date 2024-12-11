@@ -6,7 +6,7 @@
 /*   By: gakarbou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 17:06:26 by gakarbou          #+#    #+#             */
-/*   Updated: 2024/12/10 17:15:18 by gakarbou         ###   ########.fr       */
+/*   Updated: 2024/12/11 15:09:01 by gakarbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	display_lst(t_stacks *info)
 		ft_printf("[%d] -> ", gcv(cur));
 		cur = cur->next;
 	}
-	write(1, "\n\n", 2);
+	ft_putstr_fd("NULL\n\n", 1);
 	cur = info->stack_b;
 	ft_putstr_fd("Stack B = ", 1);
 	while (cur)
@@ -47,6 +47,7 @@ void	display_lst(t_stacks *info)
 		ft_printf("[%d] -> ", gcv(cur));
 		cur = cur->next;
 	}
+	ft_putstr_fd("NULL\n", 1);
 }
 
 char	is_sorted(t_list *lst)
